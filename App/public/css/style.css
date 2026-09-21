@@ -1,0 +1,50 @@
+h1 {
+    font-size: 40px;
+}
+a {
+    text-decoration: none;
+}
+p {
+    margin-bottom: 0;
+}
+form {
+    padding: 25px 45px 25px;
+    border-radius: 5px;
+    border: 1px solid rgb(130, 129, 129);
+}
+
+.auth_button {
+    background-color: #fa6de5;
+    border: none;
+}
+.auth_button:hover {
+    background-color: #bf4bae;
+}
+.auth_error {
+    background-color: #fc3d3d;
+    color: #fff;
+    font-weight: 500;
+}
+.wrapper_404 {
+    min-height: 100vh;
+}
+.error_box {
+    border: 2px solid #dbd520;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.table_col_small {
+    width: 30px;
+}
+.table_col_md {
+    width: 150px;
+}
+.requests_block {
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+.requests_block>* {
+    padding: 12px;
+    border-bottom: 2px solid #ddd;
+}
