@@ -6,6 +6,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use App\Core\Database;
 use App\Controllers\AuthController;
 use App\Controllers\RequestController;
+use App\Controllers\AdminController;
 
 const BASE_URL = '/App/public';
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -30,6 +31,16 @@ function requireAuth() {
 function redirectIfAuth() {
     if (!empty($_SESSION['user_id'])) {
         header('Location: /App/public/');
+        exit;
+    }
+}
+
+function requireAdmin() {
+    requireAuth();
+
+    if ($_SESSION['user_role'] !== 'admin') {
+        $_SESSION['error'] = 'У вас нет прав администратора';
+        header('Location: ' . BASE_URL . '/');
         exit;
     }
 }
@@ -96,16 +107,24 @@ switch($path) {
         $_SESSION['error'] = '';
         break;
     
-    case '/admin_panel':
+    case '/admin_page':
 
-        if ($_SESSION['user_role'] == 'admin') {
-            require __DIR__ . '/../Views/admin_panel.php';
-        }
-        else {
-            header('Location: /App/public/');
-            exit;
+        requireAdmin();
+
+        $controller = new AdminController();
+        $controller->showAllRequests();
+
+        break;
+
+    case '/request_update_status':
+        requireAdmin();
+
+        if ($method == 'POST') {
+            $controller = new AdminController();
+            $controller->changeRequestStatus();
         }
 
+        header('Location: ' . BASE_URL . '/admin_page');
         break;
 
     default:

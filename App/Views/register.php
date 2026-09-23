@@ -10,7 +10,7 @@
 <body>
     <div class="wrapper d-flex flex-column align-items-center container">
 
-        <form class="mt-5 d-flex flex-column col-4 row-gap-3" action="/App/public/register" method="post">
+        <form class="user_form mt-5 d-flex flex-column col-4 row-gap-3" action="/App/public/register" method="post">
             <div class="text-center form_text">
                 <h1>Регистрация</h1>
                 <p>Заполните все поля.</p>

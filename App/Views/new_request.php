@@ -16,7 +16,7 @@ use App\Models\PaymentMethodModel;
 </head>
 <body>
     <div class="wrapper d-flex container justify-content-center">
-        <form class="d-flex flex-column row-gap-4 mt-5" action="/App/public/new_request" method="post">
+        <form class="user_form d-flex flex-column row-gap-4 mt-5" action="/App/public/new_request" method="post">
                 
             <h1>Новая заявка</h1>
 

@@ -7,7 +7,7 @@ a {
 p {
     margin-bottom: 0;
 }
-form {
+.user_form {
     padding: 25px 45px 25px;
     border-radius: 5px;
     border: 1px solid rgb(130, 129, 129);
@@ -38,7 +38,10 @@ form {
     width: 30px;
 }
 .table_col_md {
-    width: 150px;
+    width: 120px;
+}
+.table_col_big {
+    width: 290px;
 }
 .requests_block {
     border: 2px solid #ddd;

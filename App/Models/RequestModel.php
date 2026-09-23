@@ -44,6 +44,7 @@ class RequestModel {
         $pdo = Database::getConnection();
         $stmt = $pdo->query(
             'SELECT
+                ROW_NUMBER() OVER (ORDER BY r.preferred_date) AS row_num,
                 r.request_id,
                 r.preferred_date,
                 s.price,
@@ -59,6 +60,41 @@ class RequestModel {
             ');
 
         return $stmt->fetchAll();
+    }
+
+    public function findById(int $id) {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare(
+            'SELECT
+                r.request_id,
+                r.preferred_date,
+                s.price,
+                s.name AS service,
+                rs.name AS status,
+                u.user_id,
+                u.login AS user_login,
+                u.email AS user_email
+            FROM Request r
+            JOIN Service s on s.service_id = r.service_id
+            JOIN Request_status rs on rs.request_status_id = r.status_id
+            JOIN User u on u.user_id = r.user_id
+            WHERE r.request_id = :id
+            LIMIT 1
+            ');
+
+        $stmt->execute(['id' => $id,]);
+        return (bool) $stmt->fetchColumn();
+    }
+
+    public function updateStatus(int $request_id, int $status_id) {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare(
+            'UPDATE Request
+            SET status_id = :status_id
+            WHERE request_id = :request_id'
+            );
+
+            return $stmt->execute(['status_id' => $status_id, 'request_id' => $request_id]);
     }
 }
 
